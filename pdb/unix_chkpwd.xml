@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<patterndb version='3' pub_date='2010-07-13'>
+  <ruleset name='unix_chkpwd' id='e9734e3b-28ed-4898-bc57-86681c4d14d4'>
+  <description>Unix Check Password</description>
+  <pattern>unix_chkpwd</pattern>
+   <rules>
+   
+   <!-- Password errata -->
+   <rule provider="patterndb" id="e258d0a2-6385-4345-914d-7f69995301bb" class="system">
+    <patterns>
+     <pattern>password check failed for user (@STRING@)</pattern>
+		</patterns>
+		<tags>
+     <tag>wrong_pwd</tag>
+    </tags>
+	 </rule>
+	 
+   </rules>
+  </ruleset>
+</patterndb>

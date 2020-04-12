@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<patterndb version='3' pub_date='2010-07-13'>
+  <ruleset name='sshd' id='3a300797-c354-4a70-bf9e-6ba312cb2ebd'>
+  <description>SSH</description>
+  <pattern>sshd</pattern>
+   <rules>
+   
+    <!-- Login ok -->  
+    <rule provider="patterndb" id="9928a027-a845-4177-87e1-52e54e9684ce" class="system">
+    <patterns>
+		 <pattern>Accepted password for @STRING@ from @IPvANY@ port @NUMBER@ ssh2</pattern>
+     <pattern>Accepted password for root from @IPv4@ port @NUMBER: @ssh2</pattern>
+     <pattern>pam_unix(sshd:session): session opened for user @STRING@ by (uid=@NUMBER@)</pattern>
+     <pattern>pam_unix(sshd:session): session opened for user root by (uid=@NUMBER@)</pattern>
+    </patterns>
+    <tags>
+    <tag>login</tag>
+    </tags>
+    </rule>
+    
+    <!-- Logout ok -->
+    <rule provider="patterndb" id="84fa852f-48be-47ff-930f-1510d9cc833e" class="system">
+    <patterns>
+     <pattern>pam_unix(sshd:session): session closed for user @STRING@</pattern>
+     <pattern>pam_unix(sshd:session): session closed for user root</pattern>
+     <pattern>Disconnected from @IPvANY@ port @NUMBER@ [preauth]</pattern>
+    </patterns>
+    <tags>
+     <tag>logout</tag>
+    </tags>
+    </rule>
+    
+    <!-- Utente non valido -->
+    <rule provider="patterndb" id="ab7408a4-4190-48b5-a61c-6ffc5e403e73" class="system">
+    <patterns>
+     <pattern>Invalid user @STRING@ from @IPvANY@ port @NUMBER@</pattern>
+     <pattern>input_userauth_request: invalid user @STRING@ [preauth]</pattern>
+     <pattern>pam_unix(sshd:auth): check pass; user unknown</pattern>
+    </patterns>
+    <tags>
+     <tag>invalid_user</tag>
+    </tags>
+   </rule>
+   
+    <!-- Password errata -->
+    <rule provider="patterndb" id="84f16527-7e0b-4268-a284-9d0a1657b7b3" class="system">
+    <patterns>
+     <pattern>pam_unix(sshd:auth): authentication failure; logname= uid=@NUMBER@ euid=@NUMBER@ tty=ssh ruser= rhost=@IPvANY@  user=@STRING@</pattern>
+     <pattern>pam_unix(sshd:auth): authentication failure; logname= uid=@NUMBER@ euid=@NUMBER@ tty=ssh ruser= rhost=@IPvANY@</pattern>
+     <pattern>PAM @NUMBER@ more authentication failures; logname= uid=@NUMBER@ euid=@NUMBER@ tty=ssh ruser= rhost=@IPvANY@  user=@STRING@</pattern>
+     <pattern>PAM 1 more authentication failure; logname= uid=@NUMBER@ euid=@NUMBER@ tty=ssh ruser= rhost=@IPvANY@</pattern>
+     <pattern>Failed password for invalid user @STRING@ from @IPvANY@ port @NUMBER@ ssh2</pattern>
+     <pattern>Failed password for @STRING@ from @IPvANY@ port @NUMBER@ ssh2</pattern>
+     <pattern>Disconnecting: Too many authentication failures [preauth]</pattern>
+     <pattern>PAM service(sshd) ignoring max retries; @NUMBER@ > @NUMBER@</pattern>
+     <pattern>error: Received disconnect from @IPvANY@ port @NUMBER@:13: Unable to authenticate [preauth]</pattern>
+     <pattern>error: maximum authentication attempts exceeded for @STRING@ from @IPvANY@ port @NUMBER@ ssh2 [preauth]</pattern>
+    </patterns>
+    <tags>
+     <tag>wrong_pwd</tag>
+    </tags>
+   </rule>
+    
+   </rules>
+  </ruleset>
+</patterndb>

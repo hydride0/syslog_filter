@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<patterndb version='3' pub_date='2010-07-13'>
+  <ruleset name='su' id='fab56d42-fc4c-498b-8591-ab416847e456'>
+  <description>su</description>
+  <pattern>su</pattern>
+   <rules>
+   
+    <!-- Login ok -->  
+    <rule provider="patterndb" id="ca0f98ad-a675-4cee-a374-4f8498ffe6a8" class="system">
+    <patterns>
+     <pattern>pam_unix(su:session): session opened for user @STRING@ by root(uid=@NUMBER@)</pattern>
+     <pattern>pam_unix(su-l:session): session opened for user root by @STRING@(uid=@NUMBER@)</pattern>
+    </patterns>
+    <tags>
+    <tag>login</tag>
+    </tags>
+    </rule>
+    
+    <!-- Logout ok -->
+    <rule provider="patterndb" id="242fe1ed-6d05-4e08-a13a-4358381bb9bc" class="system">
+    <patterns>
+     <pattern>pam_unix(su:session): session closed for user @ANYSTRING@</pattern>
+     <pattern>pam_unix(su-l:session): session closed for user @STRING@</pattern>
+    </patterns>
+    <tags>
+    <tag>logout</tag>
+    </tags>
+    </rule>
+
+    <!-- Password errata -->
+    <rule provider="patterndb" id="f22b862b-319c-4f75-aa3d-5e852c472813" class="system">
+    <patterns>
+        <pattern>pam_unix(su:auth): authentication failure; logname= uid=1000 euid=0 tty=/dev/pts/@NUMBER@ ruser=@STRING@ rhost=  user=root</pattern>
+    </patterns>
+    <tags>
+     <tag>wrong_pwd</tag>
+    </tags>
+    </rule>
+
+   </rules>
+  </ruleset>
+</patterndb>

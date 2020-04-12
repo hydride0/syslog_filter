@@ -1,0 +1,6 @@
+{
+	"invalid_user" : "Utente non valido",
+	"login"        : "Login locale/remoto",
+	"logout"       : "Logout locale/remoto",
+	"wrong_pwd"    : "Password errata locale/remoto"
+}
